@@ -1,6 +1,6 @@
 # stash-hook-router
 This is a quick hack to work around some of the shortcomings of Stash and the existing plugins.
-This project adds basic plugin functionality using [pull-request-notifier-for-stash](https://github.com/tomasbjerre/pull-request-notifier-for-stash). stash-hook-router will run the script in `STASH_SCRIPT_DIR` matching `project-name_repo-name`
+This project adds basic plugin functionality using [pull-request-notifier-for-stash](https://github.com/tomasbjerre/pull-request-notifier-for-stash). stash-hook-router will run the script in `STASH_SCRIPT_DIR` matching the project name _ repo name
 
 Example:
 
