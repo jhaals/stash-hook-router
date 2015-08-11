@@ -5,6 +5,8 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/gorilla/handlers"
+	"github.com/gorilla/mux"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -37,7 +39,8 @@ func main() {
 		log.Fatal("need STASH_SCRIPT_DIR in order to execute stuff")
 	}
 
-	http.HandleFunc("/", func(response http.ResponseWriter, request *http.Request) {
+	r := mux.NewRouter()
+	r.HandleFunc("/", func(response http.ResponseWriter, request *http.Request) {
 		if request.Method != "POST" {
 			fmt.Fprintf(response, "https://github.com/jhaals/stash-hook-router")
 			return
@@ -66,5 +69,6 @@ func main() {
 		}
 		fmt.Fprintln(response, "OK")
 	})
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	loggedRouter := handlers.LoggingHandler(os.Stdout, r)
+	log.Fatal(http.ListenAndServe(":8080", loggedRouter))
 }
